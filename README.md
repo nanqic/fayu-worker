@@ -6,6 +6,10 @@
     + 本地 `wrangler d1 execute fayu --local --file=./drizzle/0000_simple_mole_man.sql`
     + 远程 `wrangler d1 execute fayu --remote --file=./drizzle/0000_simple_mole_man.sql`
 - 导入数据
- `wrangler d1 execute fayu --local --file='../split_words/schema/title.sql'`
+ `wrangler d1 execute fayu --remote --file='../split_words/subtitles/titles.sql'`
+- 创建视图
+``` sql
+CREATE VIEW resultView AS SELECT fayuContent.LineId, fayuContent.StartTime, fayuContent.Text, fayuContent.Words, fayuTitle.Title, fayuTitle.Series FROM fayuContent LEFT JOIN fayuTitle ON fayuContent.VideoId = fayuTitle.VideoId;
+```
 - 查询
-`wrangler d1 execute fayu --local --command "select * from fayuTitle";`
+`wrangler d1 execute fayu --remote --command="select * from fayuTitle";`

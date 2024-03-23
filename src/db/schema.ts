@@ -20,7 +20,6 @@ export const fayuTitle = sqliteTable('fayuTitle', {
 });
 
 // 视图需要手动创建
-// wrangler d1 execute fayu --local --command "CREATE VIEW resultView AS SELECT fayuContent.LineId, fayuContent.StartTime, fayuContent.Text, fayuContent.Words, fayuTitle.Title FROM fayuContent LEFT JOIN fayuTitle ON fayuContent.VideoId = fayuTitle.VideoId;"
 export const resultView = sqliteView("resultView").as((qb) => {
     return qb
         .select({
@@ -28,15 +27,15 @@ export const resultView = sqliteView("resultView").as((qb) => {
             startTime: fayuContent.startTime,
             text: fayuContent.text,
             words: fayuContent.words,
-            title: fayuTitle.title
+            title: fayuTitle.title,
+            series: fayuTitle.series
         })
         .from(fayuContent)
         .leftJoin(fayuTitle, eq(fayuContent.videoId, fayuTitle.videoId));
 });
 
 export interface resultT {
-    lineId: number
-    startTime: string
-    text: string
-    title: string | null
+    count: number;
+    title: string | null;
+    subtitles: unknown;
 }
