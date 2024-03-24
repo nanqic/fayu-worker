@@ -30,7 +30,7 @@ export const getByWords = async (db: DrizzleD1Database, searchWords: string, pag
             await db.select({
                 count: count(),
                 title: resultView.title,
-                subtitles: sql`JSON_GROUP_ARRAY(JSON_OBJECT('LineId', LineId, 'StartTime', StartTime, 'Text', Text, 'Words', Words))`
+                subtitles: sql`JSON_GROUP_ARRAY(JSON_OBJECT('lineId', LineId, 'startTime', StartTime, 'text', Text))`
             }).from(resultView)
                 .where(like(resultView.text, `%${words[0]}%`))
                 .groupBy(resultView.title)
@@ -40,7 +40,7 @@ export const getByWords = async (db: DrizzleD1Database, searchWords: string, pag
             await db.select({
                 count: count(),
                 title: resultView.title,
-                subtitles: sql`JSON_GROUP_ARRAY(JSON_OBJECT('LineId', LineId, 'StartTime', StartTime, 'Text', Text, 'Words', Words))`
+                subtitles: sql`JSON_GROUP_ARRAY(JSON_OBJECT('lineId', LineId, 'startTime', StartTime, 'text', Text))`
             }).from(resultView)
                 .where(and(
                     like(resultView.words, `%${words[0]}%`),
