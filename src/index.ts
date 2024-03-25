@@ -17,7 +17,7 @@ export default {
 		const routes = url.pathname.split('/')
 
 		if (routes.length >= 3 && routes[1] === 'search') {
-			const keywords = decodeURI(routes[2])
+			const keywords = decodeURI(routes[2]).slice(0, 15)
 			const page = parseInt(routes[3]) || 1
 			const pageSize = 5
 			const [total, data] = await getByWords(db, keywords, page, pageSize)
