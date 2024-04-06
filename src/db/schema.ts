@@ -27,6 +27,7 @@ export const resultView = sqliteView("resultView").as((qb) => {
             startTime: fayuContent.startTime,
             text: fayuContent.text,
             words: fayuContent.words,
+            videoId: fayuTitle.videoId,
             title: fayuTitle.title,
             series: fayuTitle.series
         })

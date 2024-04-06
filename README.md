@@ -9,7 +9,7 @@
  `wrangler d1 execute fayu --remote --file='../split_words/subtitles/titles.sql'`
 - 创建视图
 ``` sql
-CREATE VIEW resultView AS SELECT fayuContent.LineId, fayuContent.StartTime, fayuContent.Text, fayuContent.Words, fayuTitle.Title, fayuTitle.Series FROM fayuContent LEFT JOIN fayuTitle ON fayuContent.VideoId = fayuTitle.VideoId;
+CREATE VIEW resultView AS SELECT fayuContent.LineId, fayuContent.StartTime, fayuContent.Text, fayuContent.Words, fayuTitle.Title, fayuTitle.VideoId, fayuTitle.Series FROM fayuContent LEFT JOIN fayuTitle ON fayuContent.VideoId = fayuTitle.VideoId;
 ```
 - 查询
 `wrangler d1 execute fayu --remote --command="select * from fayuTitle";`
